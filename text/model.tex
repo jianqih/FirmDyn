@@ -1,0 +1,227 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{graphicx,hyperref,amsmath,natbib,bm,url}
+\usepackage[utf8]{inputenc} % include umlaute
+
+% -------- Define new color ------------------------------
+\usepackage{color}
+\definecolor{mygrey}{rgb}{0.85,0.85,0.85} % make grey for the table
+%   }}
+\definecolor{darkblue}{rgb}{0.055,0.094,0.7}
+\definecolor{darkred}{rgb}{0.6,0,0}
+
+% --------------------------------------------------------
+\usepackage{microtype,todonotes}
+\usepackage[australian]{babel} % change date to to European format
+\usepackage[a4paper,text={14.5cm, 25.2cm},centering]{geometry} % Change page size
+\setlength{\parskip}{1.2ex} % show new paragraphs with a space between lines
+\setlength{\parindent}{0em} % get rid of indentation for new paragraph
+\clubpenalty = 10000 % prevent "orphans" 
+\widowpenalty = 10000 % prevent "widows"
+
+\hypersetup{pdfpagemode=UseNone} % un-comment this if you don't want to show bookmarks open when opening the pdf
+
+\usepackage{mathpazo} % change font to something close to Palatino
+
+\usepackage{longtable, booktabs, tabularx} % for nice tables
+\usepackage{caption,fixltx2e}  % for nice tables
+\usepackage[flushleft]{threeparttable}  % for nice tables
+
+\newcommand*{\myalign}[2]{\multicolumn{1}{#1}{#2}} % define new command so that we can change alignment by hand in rows
+ 
+% -------- For use in the bibliography -------------------
+\usepackage{multicol}
+\usepackage{etoolbox}
+\usepackage{relsize}
+\setlength{\columnsep}{1cm} % change column separation for multi-columns
+% \patchcmd{\thebibliography}
+%   {\list}
+%   {\begin{multicols}{2}\smaller\list}
+%   {}
+%   {}
+% \appto{\endthebibliography}{\end{multicols}}
+% % --------------------------------------------------------
+
+
+\usepackage[onehalfspacing]{setspace} % Line spacing
+
+\usepackage[marginal]{footmisc} % footnotes not indented
+\setlength{\footnotemargin}{0.2cm} % set margin for footnotes (so that the number doesn't stick out) 
+
+\usepackage{pdflscape} % for landscape figures
+
+\usepackage[capposition=top]{floatrow} % For notes below figure
+
+% -------- Use the following two lines for making lines grey in tables -------------------
+\usepackage{color, colortbl}
+\usepackage{multirow}
+% ----------------------------------------------------------------------------------------
+\newtheorem{defn}{Definition}[section]
+\newtheorem{reg}{Rule}[section]
+\newtheorem{exer}{Exercise}[section]
+\newtheorem{note}{Note}[section]
+\newtheorem{expl}{Example}[section]
+\newtheorem{pro}{properties}[section]
+\newtheorem{asm}{Assumption}
+\newtheorem{them}{Theorem}[section]
+\newtheorem{rmk}{Remark}[section]
+\newtheorem{coro}{Corollary}[section]
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{pros}{Proposition}[section]
+
+
+\usepackage{dsfont}
+% \tcbset{highlight math style={enhanced,
+%     colframe=red!60!black,colback=yellow!50!white,arc=4pt,boxrule=1pt,
+\hypersetup{colorlinks=true,           % put a box around links
+  linkbordercolor = {1 0 0}, % the box will be red
+  pdfborder = {1 0 0},       % 
+  % bookmarks=true,            % PDF will contain an index on the RHS
+  urlcolor=darkred,
+  citecolor=darkblue,
+  linkcolor=darkred
+}
+% The following defines a footnote without a marker
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+% -------- Customize page numbering ----------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+ \pagestyle{fancy}
+\fancyhf{} % get rid of header and footer
+ \cfoot{ \footnotesize{ \thepage } }
+
+% \rhead{\small{\textit{Jianqi Huang}}}
+% \lhead{\small{\textit{Heterogeneous Agents'n OLG model}}}
+\renewcommand{\headrulewidth}{0pt} % turn off header line
+% --------------------------------------------------------------
+
+\begin{document}
+\paragraph{Overview} This two papers \citet{hopenhayn1992entry} and \citet{hopenhayn1993job} are important papers in firm dynamics. 
+\begin{itemize}
+  \item DRS production function. 
+  \item Perfect competition in product and labor market
+  \item No aggregate shocks
+  \item Idiosyncratic productivity shocks
+  \item Entry-exit dynamics: Fixed cost to \textit{entry} and fixed cost to \textit{operate} firm each period.
+  \item Introduce adjustment costs $\Rightarrow$ induce misallocation of resource across heterogeneous producers. 
+\end{itemize}
+\paragraph{Model}Preferences: $$ \max_{C_t,N_t}\sum_{t=0}^\infty \beta^t \ln C_t + A N_t\quad\text{s.t.} \quad p_t C_t = w_t N_t + \Pi_t + T_t $$ Note that if we plug $C_t$ into objective function, we will transfer the problem to a static problem. 
+Production function: \begin{equation}
+  p_t z f(n_t) - n_t - p_t c_f - g(n_t,n_{t-1}),\quad z \sim F(z)
+\end{equation}
+where $p_t$ is the price of output, $f(n_t)$ is the production function, $n_t$ is the number of workers, $c_f$ is the fixed cost to operate the firm, and $g(n_t,n_{t-1}) = \tau[n_{t-1}-n_{t}]^+$ is the adjustment cost. Note that $n_{t-1}$ is the state variable. 
+% The productivity $z$ is drawn from a distribution $F(z)$ with support $[z_{\min},z_{\max}]$.
+
+The timing of decision: exit: receive $-g(0,n_{t-1})$ this period zero in all future periods. Entry: make employment decision $n_t$ and receive $p_t z f(n_t)-n_t -g(n_t,n_{t-1})-p_t c_f$. 
+
+Value function of incumbent firm:
+\begin{equation}
+  \begin{aligned}
+  V(z,n) &= \max_{n'\geq 0} \bigg\{p z f(n') - n'  - g(n',n)- p c_f \\ &+ \beta \max[-g(0,n'),\int V(z',n')d F(z'\mid z)] \bigg\}
+  \end{aligned}
+\end{equation}
+and the policy functions are $n' = n^d (z,n;p)$ and $\chi(z,n;p)\in \{0,1\}$. 
+
+\paragraph{Entrants and Free entry condition}
+Potential entrants are ex-ante identical. An entrants firm must pay the entry cost $c_e>0$ to set-up the plant and draw $z\sim G(z)$ starting producing next period with $n_{t-1}=0$. $M\geq 0$ mass of entrants. 
+\textit{Free entry condition}: $$\beta \int V(z,0;p)\mathrm{d}G(z)\leq c_e$$ with strict equality if $M>0$ entrants.
+
+\paragraph{Equilibrium}
+Consider the stationary equilibrium: $\mu(z,n)$ denotes the distribution of firms across the state. 
+\begin{equation} \mu_{t+1}(z',n') =\underbrace{ \int F(z'\mid z)(1-\chi(z,n))\mathbf{1}_{[n'=n^d(z,n)]} \mathrm{d}\mu_t (z,n)}_{\text{Incumbents don't exit}} + \underbrace{M_{t+1}G(z')\mathbf{1}_{[n'=0]}}_{\text{Entrants}} \end{equation}
+% The transition function is $ F(z',n'\mid z,n) = F$ 
+In stationary distribution, we have $\mu_{t+1}= \mu_t = \mu$. Again, linearity implies that $\mu(p,M) = M\times \mu(p,1)$. 
+
+
+\paragraph{Aggregation}
+Aggregate production and labor demand: 
+$$ Y(p,M) = \int (z f(n^d(z,n;p))-c_f)\mathrm{d}\mu,\quad \text{and}\quad N^d(p,M) = \int n^d(z,n;p)\mathrm{d}\mu + M c_e $$
+Expected firing tax revenue for a firm with state $(z,n)$ is 
+\begin{equation}
+  r(z,n;p ) = [1-\chi(z,n;p)]E_{z'\mid z}[g(n^d(z',n'(z,n)),n^d(z,n))]+\chi(z,n)g(0,n')
+\end{equation}
+and aggregate tax revenue $T(p,M) = \int r(z,n;p)\mathrm{d}\mu$. 
+
+Aggregate profits: \begin{equation}
+  \Pi (p,M) = p Y - N^d - T = \int \pi (z,n;p)d\mu- M c_e
+\end{equation}
+
+
+
+\paragraph{Solving Equilibrium}
+Guess price $p^*$, and solve for the DPP of the incumbents. Check if $p^*$ satisfies the free entry $\beta \int V(z,0;p)\mathrm{d}G(z)= c_e$. If not, update $p^*$ and repeat. 
+
+Given $p^*$, and the policy functions, assume $M = 1$ and solve for the stationary distribution $\mu(p^*,1)$. 
+% Labor is a state variable, solving for the invariant distribution is harder. 
+Using either the goods market or labor market clearing conditions\footnote{Actually, using the market clearing conditions is to connect firms and household's problems} to solve for $M$: 
+$$ Y(p^*,M) = M\int (zf(n^d(z,n;p))-c_f )d\mu(p^*,1)= C(p^*) $$
+Then, calculate the aggregate variables.
+
+\paragraph{Implications} The adjustment cost implies that adjustment is \textcolor{blue}{lumpy}. 
+If the adjustment cost is quadratic, firms will adjust slowly (no inaction region).
+The linear adjustment cost induces the inaction region. 
+
+Adjustment costs are less important if shocks are very persistent. 
+
+The tax also prevents inefficient firms from exiting.
+
+Note that misallocation here is induced by an aggregate friction. In more sophisticated models, the misallocation can be firm-specific.
+
+
+\section*{Continuous-time version}
+The problem of incumbent firm is
+\begin{equation}
+  \begin{aligned}
+    V(z) &= \max_{\{n_t\}_{t\geq 0},\tau} \left\{\mathbb{E}_0 \int_0^\tau e^{-\rho t}(p f(z,n)-w n_t -c_f)\mathrm{d}t+e^{-\rho \tau}V^*\right\}
+    \\ \mathrm{d}z_t &= \mu_z \mathrm{d}t + \sigma_z \mathrm{d}W_t,\quad z_0 = z.
+  \end{aligned}
+\end{equation}
+We can rewrite the problem using HJBVI equation and KFE.
+\begin{equation}
+  \min \left\{\rho V(z)- V'(z)\mu(z)-\frac{1}{2}V''(z)\sigma^2(z)-\pi(z),V(z)-V^*\right\} = 0 ,\quad \text{all } z\in (0,1)
+\end{equation}
+\begin{equation}
+  \partial_t g(z,t) = \partial_z(\mu(z)g(z,t)) + \frac{1}{2}\partial_{zz}(\sigma^2(z)g(z,t))+m(t)\psi(z), \quad \text{ all } z\in \mathcal{Z}
+\end{equation}
+where $\mathcal{Z}=[x,1]$ denotes the set of productivities such that firms remain in the industry. $m(t)$ denotes the exit rate (assume a constant mass of firms) which pinned down by the requirement that the total mass of firms is constant $\int_0^1 g(z,t)\mathrm{d}z = 1$. 
+
+If there is a simple threshold rule for exit, i.e. exit whenever $z$ falls below $x$, then \begin{equation}
+  m(t) = \frac{1}{2}\partial_z (\sigma^2 (x) g(x,t))
+\end{equation}
+Using the fact that $\int_x^1 g(z,t)\mathrm{d}z=1\Rightarrow \int_x^1 \partial_t g(z,t) = 0$.  
+to get that 
+\begin{equation}
+  \begin{aligned}
+     0 & = -\int_x^1 \partial_z (\mu(z)g(z,t))\mathrm{d}z + \frac{1}{2}\int_x^1 \partial_{zz}(\sigma^2 (z)g(z,t))\mathrm{d}z + m(t)\int_x^1 \psi(z)\mathrm{d}z \\
+      &= \mu(x)g(x,t) - \frac{1}{2}\partial_z (\sigma^2 (x) g(x,t))
+  \end{aligned}
+\end{equation}
+Further, using the diffusion process $\mathcal{A}V = \mu(z)\partial_z V+\frac{1}{2}\partial_{zz}V$ and $\mathcal{A}^*$ its adjoint $\mathcal{A}^* g = -\partial_z (\mu(z)g)+\frac{1}{2}\partial_{zz}(\sigma^2_{zz}g)$ so that the KFE is $\partial_t g = \mathcal{A}^* g + m(t)\psi(z)$. We then have \begin{equation}
+  m(t) = \int_{\mathcal{Z}}(\mathcal{A}^* g)(z,t)\mathrm{d}z
+\end{equation}
+We can characterize the equilibrium by the following system of equations: 
+\begin{equation}
+  \begin{aligned}
+  0 & =\min \left\{\rho V(z)-V^{\prime}(z) \mu(z)-\frac{1}{2} V^{\prime \prime}(z) \sigma^2(z)-\pi(z), V(z)-V^*\right\}, \quad \text { all } z \in(0,1) \\
+  0 & =-(\mu(z) g(z))^{\prime}+\frac{1}{2}\left(\sigma^2(z) g(z)\right)^{\prime \prime}+m \psi(z), \quad \text { all } z \in \mathcal{Z} \\
+  m & =-\int_{\mathcal{Z}}\left(\mathcal{A}^* g\right)(z) d z \\
+  p & =D(Q), \quad w=W(N), \quad Q=\int_{\mathcal{Z}} q(z) g(z) d z, \quad N=\int_{\mathcal{Z}} n(z) g(z) \mathrm{d} z
+  \end{aligned}
+\end{equation}
+
+
+\paragraph{Numerical Solution} relative to discrete time version, it requires that 
+
+
+
+\bibliographystyle{aer}
+\bibliography{ref.bib}
+
+
+\end{document}

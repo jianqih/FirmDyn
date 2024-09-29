@@ -1,0 +1,12 @@
+\ifx\undefined\bysame
+\newcommand{\bysame}{\leavevmode\hbox to\leftmargin{\hrulefill\,\,}}
+\fi
+\begin{thebibliography}{xx}
+
+\harvarditem[Hopenhayn]{Hopenhayn}{1992}{hopenhayn1992entry}
+{\bf Hopenhayn, Hugo~A}, ``Entry, exit, and firm dynamics in long run equilibrium,'' {\it Econometrica: Journal of the Econometric Society}, 1992, pp.~1127--1150.
+
+\harvarditem[Hopenhayn and Rogerson]{Hopenhayn and Rogerson}{1993}{hopenhayn1993job}
+{\bf Hopenhayn, Hugo and Richard Rogerson}, ``Job turnover and policy evaluation: A general equilibrium analysis,'' {\it Journal of political Economy}, 1993, {\it 101} (5), 915--938.
+
+\end{thebibliography}
